@@ -152,6 +152,8 @@ def index() -> rx.Component:
 
     return rx.center(
         rx.vstack(
+            rx.heading("Text Suggestion App", size="6"),
+            rx.text("Start typing and choose suggestions", size="3", color="gray"),
             rx.text_area(
                 id="editor",
                 value=State.text,
