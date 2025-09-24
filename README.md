@@ -43,7 +43,7 @@ reflex run
 ```
 Open `http://localhost:3000`
 
-## Help & CLI options**
+## Help & CLI options
 
 Both helper scripts come with built-in CLI help:
 - For **tokenization**:
