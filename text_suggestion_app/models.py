@@ -1,12 +1,11 @@
-# text_suggestion_app/my_models.py
 from collections import Counter, defaultdict
-from typing import Iterable, List, Tuple, Union
+from typing import List, Union
 import re, math
 
 TOKEN_RE = re.compile(r"""
-    [A-Za-z]+(?:[-'][A-Za-z]+)*   # слова, также включаем слова с дефисами и апострофами
-  | \d+(?:[./:-]\d+)*             # простые числа + даты + время
-  | [.,!?;:()"\[\]]               # пунктуация
+    [A-Za-z]+(?:[-'][A-Za-z]+)*
+  | \d+(?:[./:-]\d+)*
+  | [.,!?;:()"\[\]]
 """, re.VERBOSE)
 
 def tokenize(text: str) -> list[str]:
@@ -18,7 +17,7 @@ CLOSE_ONLY = {")"}
 def _bad_token(token: str) -> bool:
     if token in CLOSE_ONLY:
         return True
-    return not re.match(r"^[A-Za-zА-Яа-яЁё0-9][\w'\-]*$|^[.,!?;:()]$", token) # знак препинания или слово, которое начинается с буквы или цифры
+    return not re.match(r"^[A-Za-z0-9][\w'\-]*$|^[.,!?;:()]$", token)
 
 def _punct_penalty(token: str) -> float:
     return 0.5 if token in PUNCT else 1.0
@@ -118,8 +117,6 @@ class WordCompletor:
 class NGramLanguageModel:
     def __init__(self, corpus, n):
         self.n = n
-        # self.counts = {}
-        # self.history_total = {}
         self.counts = defaultdict(Counter)
         self.history_total = defaultdict(int)
         self.total_tokens = 0
@@ -217,10 +214,6 @@ class TextSuggestionOpt:
             for history, path, log_prob in beams:
                 next_words, next_probs = self.n_gram_model.get_next_words_and_probs(history)
                 next_words_probs = list(zip(next_words, next_probs))
-                # print("path: ", path)
-                # print("history: ", history)
-                # print("probs: ", words_probs)
-                # print("---------------------------")
                 if not next_words:
                     next_beams.append((history, path, log_prob))
                     continue
