@@ -172,7 +172,9 @@ def index() -> rx.Component:
                         radius="full"
                     ),
                 ),
-                gap="4",
+                wrap="wrap",
+                column_gap="3",
+                row_gap="3",
                 width="800px"
             ),
             spacing="4"
