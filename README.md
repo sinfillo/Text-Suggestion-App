@@ -43,7 +43,7 @@ reflex run
 ```
 Open `http://localhost:3000`
 
-**Help & CLI options**
+## Help & CLI options**
 
 Both helper scripts come with built-in CLI help:
 - For **tokenization**:
@@ -54,3 +54,7 @@ Both helper scripts come with built-in CLI help:
     ```bash
     python build_sugg_model.py --help
     ```
+
+## Demo
+
+![Demo GIF](assets/demo.gif)
